@@ -1,2 +1,0 @@
-# python
-#by Alexandre Gushi
