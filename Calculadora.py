@@ -1,7 +1,3 @@
-#!/usr/bin/env python3
-
-import tkinter
-
 def sair():
     window.destroy()
 
@@ -10,6 +6,9 @@ window=tkinter.Tk()
 window.title("Calculadora 0.0")
 window.geometry("270x300")
 
+# Colocando o menu (não está funcionando)
+
+# Criando o corpo de operações
 esp1 = tkinter.Label(window, text="")
 esp1.pack()
 
@@ -45,7 +44,7 @@ bresul.pack()
 esp4 = tkinter.Label(window, text="")
 esp4.pack()
 
-quitb = tkinter.Button(window, text="Quit", command=sair)
+quitb = tkinter.Button(window, text="Sair", command=sair)
 quitb.pack()
 
 window.mainloop()
