@@ -1,0 +1,84 @@
+#!/usr/bin/env python3
+
+import os, tkinter as tk, sqlite3
+
+os.chdir ('C:\\Users\\agushi\\Desktop\\Python\\Database')
+
+class SampleApp(tk.Tk):
+
+    def __init__(self):
+        tk.Tk.__init__(self)
+        self.geometry("200x300")
+        self.title("Cadastro")
+        self.label1 = tk.Label(self, text="Nome")
+        self.entry1 = tk.Entry(self)
+        self.label2 = tk.Label(self, text="Idade")
+        self.entry2 = tk.Entry(self)
+        self.label3 = tk.Label(self, text="Profissão")
+        self.entry3 = tk.Entry(self)
+        self.label4 = tk.Label(self, text="")
+        self.button1 = tk.Button(self, text="Gravar Conteúdo", command=self.on_button)
+        self.label5 = tk.Label(self, text="")
+        self.button2 = tk.Button(self, text="Printar dados", command=printardados)
+        self.label6 = tk.Label(self, text="")
+        self.button3 = tk.Button(self, text="Limpar Tabela", command=limpartabela)
+        
+        self.label1.pack()
+        self.entry1.pack()
+        self.label2.pack()
+        self.entry2.pack()
+        self.label3.pack()
+        self.entry3.pack()
+        self.label4.pack()
+        self.button1.pack()
+        self.label5.pack()
+        self.button2.pack()
+        self.label6.pack()
+        self.button3.pack()
+        self.entry1.focus()
+
+    def on_button(self):
+        lnome = self.entry1.get()
+        lidade = self.entry2.get()
+        lprofissao = self.entry3.get()
+        t.execute('INSERT INTO informacoes (nome, idade, profissao) VALUES (?,?,?)', (lnome, lidade, lprofissao))
+        tabela.commit()
+        
+        #printando todos os registros da tabela informacoes
+        t.execute("SELECT * FROM informacoes")
+        rows = t.fetchall()
+        for row in rows:
+            print(row[0], row[1], row[2], row[3])
+
+        print("Dados gravados com sucesso!")
+
+        #limpando os entries e setando focus no entry1
+        self.entry1.delete(0, 'end')
+        self.entry2.delete(0, 'end')
+        self.entry3.delete(0, 'end')
+        self.entry1.focus()
+        
+def limpartabela():
+    perg = input("Realmente deseja limpar a tabela (s/n)?")
+    if perg == "s":
+        t.execute("""DROP TABLE IF EXISTS informacoes""")
+        t.execute("""CREATE TABLE IF NOT EXISTS informacoes (Id INTEGER PRIMARY KEY, nome TEXT, idade INT, profissao TEXT)""")
+        print("Limpeza efetuada.")
+    else:
+        print("Operação abortada.")
+
+def printardados():
+    t.execute("SELECT * FROM informacoes")
+    rows = t.fetchall()
+    for row in rows:
+        print(row[0], row[1], row[2], row[3])
+            
+tabela = sqlite3.connect("infordb.db")        
+t = tabela.cursor()
+
+#criando tabela se não existir
+t.execute("""CREATE TABLE IF NOT EXISTS informacoes (Id INTEGER PRIMARY KEY, nome TEXT, idade INT, profissao TEXT)""")
+
+w = SampleApp()
+
+w.mainloop()
