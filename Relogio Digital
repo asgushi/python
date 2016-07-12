@@ -1,0 +1,26 @@
+#!/usr/bin/env python3
+
+import tkinter, datetime
+
+def sair():
+    window.destroy()
+
+def atualizar_relogio():
+    agora = datetime.datetime.now()
+    lbl1.configure(text="\n" + agora.strftime("%d-%m-%Y   %H:%M:%S") + "\n")
+    window.after(1000, atualizar_relogio)
+
+window=tkinter.Tk()
+
+window.title("Relógio")
+window.geometry("250x130")
+
+lbl1 = tkinter.Label(window, text="", font=("Helvetica", 20))
+lbl1.pack()
+
+btn1 = tkinter.Button(window, text="Sair", command=sair)
+btn1.pack()
+
+atualizar_relogio()
+
+window.mainloop()
