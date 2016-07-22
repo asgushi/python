@@ -1,0 +1,27 @@
+import json, os
+
+tweets_data_path = 'C:\\Users\\agushi\\Desktop\\Python\\Tweets TD.txt'
+
+tweets_data = []
+tweets_file = open(tweets_data_path, "r")
+
+n=1
+for line in tweets_file:
+    try:
+        tweet = json.loads(line)
+        tweets_data.append(tweet)
+        print("")
+        print('Tweet #' + str(n) + ':')
+        print("")
+        print("Text: " + tweet['text'])
+        print("")
+        print("Source: " + tweet['source'])
+        print("")
+        #print("Truncated: " + tweet['truncated'])
+        #print("In reply to status ID: " + tweet['in_reply_to_status_id'])
+        #print("Name: " + tweet['name'])
+        print("----------------------------------------------------------------------------------------------------------------")
+        n += 1
+        
+    except:
+        continue
