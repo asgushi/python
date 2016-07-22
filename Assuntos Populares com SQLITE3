@@ -1,0 +1,74 @@
+from collections import Counter
+import os, sqlite3
+
+print("""
+
+Este é um exemplo de uma lista de assuntos que é carregada em base de dados
+userinterest.db) edepois lida. Um algoritmo então conta os assuntos e printa
+os dez maiores.
+
+A base é no fim apagada.
+
+By Alexandre Gushi, 19/07/2016
+
+""")
+
+assuntos = [
+    ['Conteudo 1'], 
+    ['Conteudo 2'],
+    ['Conteudo 3'],
+    ]
+
+os.chdir ('C:\\Users\\agushi\\Desktop\\Python\\Database')
+
+tamlis = len(assuntos)
+
+tabela = sqlite3.connect("userinterest.db")        
+t = tabela.cursor()
+
+#criando tabela se não existir
+t.execute("""CREATE TABLE IF NOT EXISTS infouserinterest (conteudo TEXT)""")
+
+#inserindo os dados na tabela
+y = 0
+print("Carregando base de assuntos...")
+while y < tamlis:
+    tabela.cursor().execute('INSERT INTO infouserinterest (conteudo) VALUES (?)', (assuntos[y]))
+    y = y + 1
+tabela.commit()
+print("Base userinterest.db carregada com sucesso!")
+print(str(tamlis) + " itens carregados")
+
+#input("Mostrando dados carregados:")
+t.execute("SELECT * FROM infouserinterest")
+
+#definindo assuntos mais populares
+users_interests = t.fetchall()
+
+popular_interests = Counter(interest
+                            for user_interests in users_interests
+                            for interest in user_interests).most_common()
+
+def most_popular_new_interests(user_interests, max_results=3):
+    suggestions = [(interest, frequency) 
+                   for interest, frequency in popular_interests 
+                   if interest not in user_interests]
+    return suggestions[:max_results]
+
+#printando resultado
+print("--------------------------------------------------------------------------------------")
+print("Quantidade de assuntos lidos da base userinterest.db:")
+print(len(users_interests))
+print("--------------------------------------------------------------------------------------")
+print("Lista dos mais populares assuntos:")
+
+lenpos = len(popular_interests)
+
+for pos in range(lenpos):
+    print(str(pos+1) + "º - " + str((popular_interests[pos])))
+
+print("--------------------------------------------------------------------------------------")
+
+#apagando base
+t.execute("""DROP TABLE IF EXISTS infouserinterest""")
+print("Base apagada com sucesso!")
