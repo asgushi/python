@@ -1,0 +1,20 @@
+import os, time
+import csv
+
+starttime = round(time.time())
+
+os.chdir ('C:\\Users\\agushi\\Desktop\\Python\\csv')
+
+novoarquivo = "CSV " + str(starttime) + ".csv"
+
+print(novoarquivo)
+
+outputfile = open(novoarquivo, 'w', newline='')
+
+outputWriter = csv.writer(outputfile)
+
+outputWriter.writerow(['spam', 'eggs', 'bacon', 'ham'])
+outputWriter.writerow(['Hello, world!', 'eggs', 'bacon', 'ham'])
+outputWriter.writerow([1, 2, 3.141592, 4])
+
+outputfile.close
