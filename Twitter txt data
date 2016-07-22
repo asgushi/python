@@ -1,5 +1,8 @@
 import json, os
 
+#Este script carrega linha alinha um arquivo txt contendo mensagens no formato JSON
+#E printa conteúdos específicos, neste caso, "text" e "source"
+
 tweets_data_path = 'C:\\Users\\agushi\\Desktop\\Python\\Tweets TD.txt'
 
 tweets_data = []
