@@ -1,0 +1,6 @@
+json_string = 'JSON goes here'
+
+import json
+parsed_json = json.loads(json_string)
+
+print(parsed_json["XXXXXXXXXXX"])
