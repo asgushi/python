@@ -8,13 +8,12 @@ pythonValue = r'''{"created_at":"Fri Jul 22 13:46:18 +0000 2016","id":7564855248
 ##               "text":"RT @diegoescosteguy: Dilma cada vez mais distante de Bras\u00edlia. https:\/\/t.co\/UWxGt3T3JF",
 ##               "source":"\u003ca href=\"http:\/\/twitter.com\/download\/android\" rel=\"nofollow\"\u003eTwitter for Android\u003c\/a\u003e"}
 
-stringOfJsonData = json.dumps(pythonValue)
-jsonDataAsPythonValue = json.loads(stringOfJsonData)
+jsonDataAsPythonValue = json.loads(pythonValue)
 
-print(jsonDataAsPythonValue)
+#print(jsonDataAsPythonValue)
 
 #filtra string que possui a key:'text'
-conteudo={}
+#conteudo={}
 conteudo = str(jsonDataAsPythonValue.get('text',0))
 print(conteudo)
 
