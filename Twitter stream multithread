@@ -1,0 +1,47 @@
+import sys, csv, tweepy, threading, time
+
+#tokens
+consumer_key="1NErWCeVRAQocB5OM7MzyvKi7"
+consumer_secret="TNhfsPH2sbg8pQaoYStLuMCoiWKJZcMSm2bUSQSBQoa8JuDdES"
+access_key = "39637886-hyt2Eg69Tr2dtC55spNlUBdLm7u3e2adXx7a1k1Xj"
+access_secret = "MYOKFTFR3Pj6XnwxcBMUT8AWeGDWTpEDcwerlD68Eijtb"
+
+#acessando twitter
+auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+auth.set_access_token(access_key, access_secret)
+api = tweepy.API(auth)
+
+#threading contar palavras do txt e gerar grafico
+
+def contar_e_grafico():
+    while True:
+        time.sleep(10)
+        #lembrar de quando ler a linha, tirar o primeiro caracter que eh a letra b
+        
+contar_thread = threading.Thread(target=contar_e_grafico)
+contar_thread.start()
+
+#criando objeto 'customStreamListener'
+
+class CustomStreamListener(tweepy.StreamListener):
+
+    def on_status(self, status):
+        #print(status.author.screen_name, status.created_at, status.text)
+        encoded = status.text.encode("utf-8", errors='ignore').lower()
+        print(encoded)
+        with open('file.txt', 'a', newline="") as f: 
+            writer = csv.writer(f)
+            writer.writerow([encoded])
+            f.close()
+
+    def on_error(self, status_code):
+        print >> sys.stderr, 'Encountered error with status code:', status_code
+        return True # Don't kill the stream
+
+    def on_timeout(self):
+        print >> sys.stderr, 'Timeout...'
+        return True # Don't kill the stream
+
+streamingAPI = tweepy.streaming.Stream(auth, CustomStreamListener())
+#filtro
+streamingAPI.filter(track=['brasil'])
