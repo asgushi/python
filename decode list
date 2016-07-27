@@ -1,0 +1,11 @@
+lista = [b'um', b'dois', b'tres']
+
+decodedlista = []
+
+for string in lista:
+    novo = string.decode('UTF-8')
+    decodedlista.append(novo)
+
+lista = decodedlista
+
+decodedlista = []
