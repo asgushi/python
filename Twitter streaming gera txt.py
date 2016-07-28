@@ -1,10 +1,10 @@
 import sys, csv, tweepy
 
 #tokens
-consumer_key="1NErWCeVRAQocB5OM7MzyvKi7"
-consumer_secret="TNhfsPH2sbg8pQaoYStLuMCoiWKJZcMSm2bUSQSBQoa8JuDdES"
-access_key = "39637886-hyt2Eg69Tr2dtC55spNlUBdLm7u3e2adXx7a1k1Xj"
-access_secret = "MYOKFTFR3Pj6XnwxcBMUT8AWeGDWTpEDcwerlD68Eijtb"
+consumer_key=""
+consumer_secret=""
+access_key = ""
+access_secret = ""
 
 #acessando twitter
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
